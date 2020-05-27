@@ -1,0 +1,22 @@
+datasource sqlite {
+  provider = "sqlite"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Tag {
+  id    Int     @default(autoincrement()) @id
+  music Int
+  name  String
+  Music Music[]
+}
+
+model Music {
+  id     Int    @default(autoincrement()) @id
+  name   String
+  author String
+  tags   Tag    @relation(fields: [id], references: [id])
+}

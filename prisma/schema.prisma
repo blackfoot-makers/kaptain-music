@@ -1,0 +1,26 @@
+datasource sqlite {
+  provider = "sqlite"
+  url      = "file:./catalog.db"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["windows", "native"]
+}
+
+model Tag {
+  id    Int     @default(autoincrement()) @id
+  name  String
+  music Int?
+  Music Music[]
+}
+
+model Music {
+  id       Int    @default(autoincrement()) @id
+  name     String
+  author   String
+  image    String
+  path     String
+  filename String
+  tags     Tag    @relation(fields: [id], references: [id])
+}
