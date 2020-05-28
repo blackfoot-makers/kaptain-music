@@ -6,7 +6,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: npm install
-    - run: sudo apt-get install xvfb
-    - run: xvfb-run --auto-servernum npm test
+      - uses: actions/checkout@v1
+      - run: npm install
+      - run: sudo apt-get install xvfb
+      - run: Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+      - run: export DISPLAY=':99.0'
+      - run: npm test
