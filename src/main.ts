@@ -19,14 +19,13 @@ function createWindow() {
     },
   });
 
-  if (process.env.NODE_ENV === "development")
+  if (process.env.NODE_ENV === "development") {
     win.loadURL("http://localhost:3000/");
-  else
+    win.webContents.openDevTools();
+  } else
     win
       .loadURL(`file://${join(__dirname, "../app/build/index.html")}`)
       .catch((err) => console.error(err));
-
-  win.webContents.openDevTools();
 }
 
 // This method will be called when Electron has finished

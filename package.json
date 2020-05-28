@@ -11,7 +11,8 @@
     "build": "cross-env NODE_ENV=production yarn reactbuild && yarn tsc && electron-packager . --ignore .ts --overwrite --out builds/",
     "start": "yarn build && ./builds/kaptain-music-linux-x64/kaptain-music",
     "startwin": "yarn build --arch x64 --platform win32 && wine ./builds/kaptain-music-win32-x64/kaptain-music",
-    "rebuild": "electron-rebuild node_modules"
+    "rebuild": "electron-rebuild node_modules",
+    "test": "mocha"
   },
   "dependencies": {
     "@prisma/client": "^2.0.0-beta.5",
@@ -25,6 +26,7 @@
     "electron": "^9.0.0",
     "electron-packager": "^14.2.1",
     "electron-rebuild": "^1.11.0",
+    "mocha": "^7.2.0",
     "spectron": "^11.0.0",
     "tslint": "^6.1.2",
     "typescript": "^3.9.3"
