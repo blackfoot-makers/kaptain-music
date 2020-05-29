@@ -33,6 +33,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install
-        run: npm install
+        run: npm install && cd app && npm install
+      - name: build
+        run: npx tsc
       - name: Test
         run: npm test
