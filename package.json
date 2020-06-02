@@ -5,9 +5,10 @@
   "repository": "https://github.com/blackfoot-makers/kaptain-music",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development yarn tsc && cross-env NODE_ENV=development concurrently 'yarn react' 'electron dist/main.js'",
+    "dev": "cross-env NODE_ENV=development concurrently 'yarn tsc -w' 'yarn reactwatch' 'electron .'",
     "react": "cd app/; yarn start",
     "reactbuild": "cd app/; yarn build",
+    "reactwatch": "cd app/; yarn watch",
     "build": "cross-env NODE_ENV=production yarn reactbuild && yarn tsc && electron-packager . --ignore .ts --overwrite --out builds/",
     "start": "yarn build && ./builds/kaptain-music-linux-x64/kaptain-music",
     "startwin": "yarn build --arch x64 --platform win32 && wine ./builds/kaptain-music-win32-x64/kaptain-music",
@@ -18,7 +19,8 @@
     "@prisma/client": "^2.0.0-beta.5",
     "@types/node": "^12.12.6",
     "check-disk-space": "^2.1.0",
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "electron-reload": "^1.5.0"
   },
   "devDependencies": {
     "@prisma/cli": "^2.0.0-beta.5",
@@ -29,6 +31,7 @@
     "mocha": "^7.2.0",
     "spectron": "^11.0.0",
     "tslint": "^6.1.2",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.3",
+    "xvfb-maybe": "^0.2.1"
   }
 }

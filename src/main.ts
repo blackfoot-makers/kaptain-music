@@ -4,6 +4,7 @@ import { PrismaClient, Music } from "@prisma/client";
 import { ipcMain } from "electron";
 import { platform } from "os";
 
+require("electron-reload")(__dirname);
 const checkDiskSpace = require("check-disk-space");
 const prisma = new PrismaClient();
 
@@ -15,17 +16,14 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
+      webSecurity: false,
       nodeIntegration: true,
     },
   });
 
-  if (process.env.NODE_ENV === "development") {
-    win.loadURL("http://localhost:3000/");
-    win.webContents.openDevTools();
-  } else
-    win
-      .loadURL(`file://${join(__dirname, "../app/build/index.html")}`)
-      .catch((err) => console.error(err));
+  win
+    .loadURL(`file://${join(__dirname, "../app/build/index.html")}`)
+    .catch((err) => console.error(err));
 }
 
 // This method will be called when Electron has finished

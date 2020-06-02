@@ -43,17 +43,17 @@ function App() {
 
   function syncMusic() {
     const path = ipcRenderer.sendSync("cwd");
-    const MUSIC_FOLDER = "./app/public/musics/";
+    const MUSIC_FOLDER = "/home/greefine/musics/";
     fs.readdir(MUSIC_FOLDER, (err: any, files: string[]) => {
       if (err) return console.error(err);
       files.forEach((filename) => {
         ipcRenderer.send("addMusic", {
           name: filename.replace(".mp3", ""),
-          path: join(path, MUSIC_FOLDER + filename),
+          path: MUSIC_FOLDER + filename,
           filename,
           tagName: "Rock",
-          image:
-            "https://img.urbania.ca/media/2018/11/df-02815_r.jpg?w=1280&h=853&fit=crop&crop=edges&fm=pjpeg&q=60&dpr=1",
+          image: "/home/greefine/Images/copy.png",
+          // "https://img.urbania.ca/media/2018/11/df-02815_r.jpg?w=1280&h=853&fit=crop&crop=edges&fm=pjpeg&q=60&dpr=1",
         });
       });
     });
@@ -62,7 +62,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h3>Kaptain Music.</h3>
+        <h3>Kaptain Music !</h3>
         <Row>
           <button onClick={syncMusic}>Sync Music</button>
           <button
@@ -85,14 +85,14 @@ function App() {
                     ev.target.checked
                       ? selected_musics.push(music.path)
                       : (selected_musics = selected_musics.filter(
-                          (path) => path !== music.path
-                        ))
+                        (path) => path !== music.path
+                      ))
                   }
                 />
                 <img width="20%" src={music.image} />
                 <p>{music.name}</p>
                 <audio controls>
-                  <source src={`./musics/${music.filename}`} type="audio/mp3" />
+                  <source src={`file://${music.path}`} type="audio/mp3" />
                   Your browser does not support the audio element.
                 </audio>
               </Row>
